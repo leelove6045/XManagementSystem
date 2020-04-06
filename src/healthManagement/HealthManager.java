@@ -16,9 +16,9 @@ public class HealthManager {
 		health.ProgramName = input.next();
 		System.out.print("What is your member ID? :");
 		health.id = input.nextInt();
-		System.out.print("How many times per set?");
+		System.out.print("How much weight will you carry?(kg)");
 		health.weight = input.next();
-		System.out.print("How much weight will you carry?(kg) :");
+		System.out.print("How much break time do you need? :");
 		health.breaktime = input.next();
 		
 	}
@@ -39,8 +39,37 @@ public class HealthManager {
 		System.out.print("What is your member ID :");
 		int healthId = input.nextInt();
 		if (health.id == healthId) {
-			health=null;
-			System.out.println("the Program to be edited is"+ healthId);
+			int num = -1;
+		
+			while (num != 5) {
+				System.out.println("** Health Info Edit Menu **");
+				System.out.println("1. Edit Program Name");
+				System.out.println("2. Edit Member Id");
+				System.out.println("3. Edit weight");
+				System.out.println("4. Edit break time");
+				System.out.println("5. Exit");
+				System.out.println("Select one number between 1 - 5:");
+				num = input .nextInt();
+				if (num==1) {
+					System.out.print("Health Program name :");
+					health.ProgramName = input.next();
+				}
+				else if (num==2) {
+					System.out.print("What is your member ID? :");
+					health.id = input.nextInt();
+				}
+				else if (num==3) {
+					System.out.print("How much weight will you carry?(kg)");
+					health.weight = input.next();
+				}
+				else if (num==4) {
+					System.out.print("How much break time do you need? :");
+					health.breaktime = input.next();
+				}
+				else {
+					continue;
+				}
+			}
 		}
 	}
 	public void viewHealth() {
