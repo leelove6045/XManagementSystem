@@ -3,6 +3,9 @@ package healthManagement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import health.ARMexercise;
+import health.Health;
+
 public class HealthManager {
 	ArrayList<Health> healths = new ArrayList<Health>();
 	Scanner input;
@@ -11,24 +14,40 @@ public class HealthManager {
 		this.input = input;
 	}
 	
-	public void addHealth() {
-		Health health = new Health();
-		System.out.print("Health Program name :");
-		health.ProgramName = input.next();
-		System.out.print("What is your member ID? :");
-		health.id = input.nextInt();
-		System.out.print("How much weight will you carry?(kg)");
-		health.weight = input.next();
-		System.out.print("How much break time do you need? :");
-		health.breaktime = input.next();
-		healths.add(health);
+	public void addHealth() {//헬스 추가하기
+		int kind = 0;
+		Health health;
+		while (kind !=1 && kind !=2) {//1과 2를 선택하지 않으면 계속 반복
+			System.out.print("1 for LowerBody Health Program\n");//운동의 종류 선택하기
+			System.out.print("2 for Arm Health Program\n");
+			System.out.print("Select num for Health Program kind between 1 and 2 :");
+			kind = input.nextInt();
+			if (kind == 1) {
+				//하체운동 일때 입력파트
+				health = new Health();
+				health.getUserInput(input);
+				healths.add(health);
+				break;
+			}
+			else if (kind == 2) {
+				//팔운동 일때 입력파트
+				health = new ARMexercise();
+				health.getUserInput(input);
+				healths.add(health);
+				break;
+			}
+			else {
+				System.out.println("Select num for Health Program kind between 1 and 2 :");
+			}
+		}
+	
 	}
-	public void deleteHealth() {
+	public void deleteHealth() {//헬스 지우기
 		System.out.print("What is your member ID :");
 		int healthId = input.nextInt();	
 		int index = -1;
 		for(int i=0; i<healths.size();i++) {
-			if (healths.get(i).id == healthId) {
+			if (healths.get(i).getId() == healthId) {
 				index = i;
 				break;
 			}
@@ -44,15 +63,15 @@ public class HealthManager {
 
 	}
 		
-	public void editHealth() {
+	public void editHealth() {//헬스 수정하기
 		System.out.print("What is your member ID :");
 		int healthId = input.nextInt();
 		for(int i=0; i<healths.size();i++) {
 			Health health = healths.get(i);
-			if (health.id == healthId) {
+			if (health.getId() == healthId) {
 				int num = -1;
 			
-				while (num != 5) {
+				while (num != 5) {//수정할 항목을 선택한다
 					System.out.println("** Health Info Edit Menu **");
 					System.out.println("1. Edit Program Name");
 					System.out.println("2. Edit Member Id");
@@ -63,19 +82,23 @@ public class HealthManager {
 					num = input .nextInt();
 					if (num==1) {
 						System.out.print("Health Program name :");
-						health.ProgramName = input.next();
+						String ProgramName = input.next();
+						health.setProgramName(ProgramName);
 					}
 					else if (num==2) {
 						System.out.print("What is your member ID? :");
-						health.id = input.nextInt();
+						int id = input.nextInt();
+						health.setId(id);
 					}
 					else if (num==3) {
 						System.out.print("How much weight will you carry?(kg)");
-						health.weight = input.next();
+						String weight = input.next();
+						health.setWeight(weight);
 					}
 					else if (num==4) {
 						System.out.print("How much break time do you need? :");
-						health.breaktime = input.next();
+						String breaktime = input.next();
+						health.setBreaktime(breaktime);
 					}
 					else {
 						continue;
@@ -85,9 +108,10 @@ public class HealthManager {
 			}//if
 		}//for
 	}
-	public void viewHealths() {
+	public void viewHealths() {//저장된 헬스 모두 보여주기
 //		System.out.print("What is your member ID :");
 //		int healthId = input.nextInt();
+		System.out.println("# of registered members : "+healths.size());
 		for(int i=0; i<healths.size();i++) {
 			healths.get(i).printInfo();
 		}
