@@ -13,6 +13,12 @@ public class Health {
 	public Health() {
 		
 	}
+	
+	public Health(Healthkind kind) {
+		this.kind = kind;
+		
+	}
+	
 	public Health(String ProgramName, int id) {
 	super();
 	this.ProgramName = ProgramName;
@@ -21,6 +27,15 @@ public class Health {
 	
 	public Health(String ProgramName, int id, String weight, String breaktime) {
 	super();
+	this.ProgramName = ProgramName;
+	this.id = id;
+	this.weight = weight;
+	this.breaktime = breaktime;
+	}
+	
+	public Health(Healthkind kind, String ProgramName, int id, String weight, String breaktime) {
+	super();
+	this.kind = kind;
 	this.ProgramName = ProgramName;
 	this.id = id;
 	this.weight = weight;
@@ -51,6 +66,8 @@ public class Health {
 	public void setWeight(String weight) {
 		this.weight = weight;
 	}
+	
+	
 	public String getBreaktime() {
 		return breaktime;
 	}
@@ -59,7 +76,24 @@ public class Health {
 	}
 
 	public void printInfo() {
-		System.out.println("Program name : "+ this.ProgramName + "member id: "+ this.id +"weight:" + this.weight + "breaktime: "+ this.breaktime);	
+		String skind = "none";
+		switch(this.kind) {
+		case lowerBodyExercise : 
+			skind = "LowerBody Exercise";
+			break;
+		case ArmExercise :
+			skind = "Arm Exercise";
+			break;
+		case BackExercise :
+			skind = "Back Exercise";
+			break;
+		case ChestExercise :
+			skind = "Chest Exercise";
+			break;
+		default :
+			
+		}
+		System.out.println("kind:" + skind + " Program name : "+ ProgramName + " member id: "+ id +" weight:" + weight + " breaktime: "+ breaktime);	
 	}
 	
 	public void getUserInput(Scanner input) {

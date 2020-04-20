@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import health.ARMexercise;
+import health.CHESTexercise;
 import health.Health;
+import health.Healthkind;
 
 public class HealthManager {
 	ArrayList<Health> healths = new ArrayList<Health>();
@@ -20,24 +22,32 @@ public class HealthManager {
 		while (kind !=1 && kind !=2) {//1과 2를 선택하지 않으면 계속 반복
 			System.out.print("1 for LowerBody Health Program\n");//운동의 종류 선택하기
 			System.out.print("2 for Arm Health Program\n");
-			System.out.print("Select num for Health Program kind between 1 and 2 :");
+			System.out.print("3 for Chest Health Program\n");
+			System.out.print("Select num 1, 2, or 3 for Health Program kind between 1 and 2 :");
 			kind = input.nextInt();
 			if (kind == 1) {
 				//하체운동 일때 입력파트
-				health = new Health();
+				health = new Health(Healthkind.lowerBodyExercise);
 				health.getUserInput(input);
 				healths.add(health);
 				break;
 			}
 			else if (kind == 2) {
 				//팔운동 일때 입력파트
-				health = new ARMexercise();
+				health = new ARMexercise(Healthkind.ArmExercise);
+				health.getUserInput(input);
+				healths.add(health);
+				break;
+			}
+			else if (kind == 3) {
+				//가슴운동 일때 입력파트
+				health = new CHESTexercise(Healthkind.ChestExercise);
 				health.getUserInput(input);
 				healths.add(health);
 				break;
 			}
 			else {
-				System.out.println("Select num for Health Program kind between 1 and 2 :");
+				System.out.println("Select num for Health Program kind between 1 and 3 :");
 			}
 		}
 	

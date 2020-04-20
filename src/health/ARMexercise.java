@@ -3,6 +3,11 @@ package health;
 import java.util.Scanner;
 
 public class ARMexercise extends Health {
+	
+	public ARMexercise(Healthkind kind) {
+		super(kind);
+		
+	}
 
 	public void getUserInput(Scanner input) {
 		System.out.print("Health Program name :");//운동 이름을 입력받기
