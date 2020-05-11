@@ -2,7 +2,7 @@ package health;
 
 import java.util.Scanner;
 
-public class Health {
+public abstract class Health implements HealthInput{
 
 	protected Healthkind kind = Healthkind.ArmExercise;
 	protected String ProgramName;
@@ -67,15 +67,41 @@ public class Health {
 		this.weight = weight;
 	}
 	
-	
 	public String getBreaktime() {
 		return breaktime;
 	}
 	public void setBreaktime(String breaktime) {
 		this.breaktime = breaktime;
 	}
+	
+	public abstract void printInfo();
+	
+	
+	public void setProgramName(Scanner input) {//운동 이름 입력받기
+		System.out.print("Health Program name :");
+		String ProgramName = input.next();
+		this.setProgramName(ProgramName);
+	}
+	
+	public void setHealthID(Scanner input) {//회원 아이디 입력받기
+		System.out.print("What is your member ID? :");
+		int id = input.nextInt();
+		this.setId(id);
+	}
 
-	public void printInfo() {
+	public void setWeight(Scanner input) {
+		System.out.print("How much weight will you carry?(kg)");
+		String weight = input.next();
+		this.setWeight(weight);
+	}
+	
+	public void setBreaktime(Scanner input) {
+		System.out.print("How much break time do you need? :");
+		String breaktime = input.next();
+		this.setBreaktime(breaktime);
+	}
+	
+	public String getKindString() {
 		String skind = "none";
 		switch(this.kind) {
 		case lowerBodyExercise : 
@@ -90,11 +116,11 @@ public class Health {
 		case ChestExercise :
 			skind = "Chest Exercise";
 			break;
-		default :
-			
+		default :	
 		}
-		System.out.println("kind:" + skind + " Program name : "+ ProgramName + " member id: "+ id +" weight:" + weight + " breaktime: "+ breaktime);	
-	}
+		return skind;
+	}	
+
 	
 	public void getUserInput(Scanner input) {
 		System.out.print("Health Program name :");//운동 이름을 입력받기
