@@ -2,6 +2,8 @@ package health;
 
 import java.util.Scanner;
 
+import exceptions.WeightFormatException;
+
 public abstract class UpperBodyexercise extends Health {
 	
 	public UpperBodyexercise(Healthkind kind) {
@@ -22,16 +24,21 @@ public abstract class UpperBodyexercise extends Health {
 		while(answer != 'y' && answer !='Y' && answer != 'n' && answer !='N') {
 			System.out.print("Can you lift the weight?(Y/N)");//중량을 들 수 있는지 입력받기
 			answer = input.next().charAt(0);
-			if (answer == 'y'|| answer == 'Y') {//중량을 들 수 있다고 답하다면
-				setWeight(input);
-				break;
+			try {
+				if (answer == 'y'|| answer == 'Y') {//중량을 들 수 있다고 답하다면
+					setWeight(input);
+					break;
+				}
+				else if (answer == 'n'|| answer == 'N') {//중량을 들 수 없다고 답하면
+					setWeight("");//null
+					break;
+				}
+				else {//Y,y,N,n이 아닌 character를 입력하면 while문이 계속 실행 된다.
+				}
 			}
-			else if (answer == 'n'|| answer == 'N') {//중량을 들 수 없다고 답하면
-				System.out.print("");//null
-				break;
+			catch(WeightFormatException e) {
+				System.out.println("Incorreect Weight Format, put the weight that you can carry (kg)");
 			}
-			else {//Y,y,N,n이 아닌 character를 입력하면 while문이 계속 실행 된다.
-			}	
 		}
 	}
 

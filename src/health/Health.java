@@ -2,6 +2,8 @@ package health;
 
 import java.util.Scanner;
 
+import exceptions.WeightFormatException;
+
 public abstract class Health implements HealthInput{
 
 	protected Healthkind kind = Healthkind.ArmExercise;
@@ -63,7 +65,11 @@ public abstract class Health implements HealthInput{
 	public String getWeight() {
 		return weight;
 	}
-	public void setWeight(String weight) {
+	public void setWeight(String weight) throws WeightFormatException{
+		if (!weight.contains("kg") && !weight.equals("")) {
+			throw new WeightFormatException();
+		}
+		
 		this.weight = weight;
 	}
 	
@@ -90,9 +96,16 @@ public abstract class Health implements HealthInput{
 	}
 
 	public void setWeight(Scanner input) {
-		System.out.print("How much weight will you carry?(kg)");
-		String weight = input.next();
-		this.setWeight(weight);
+		String weight ="";
+		while (!weight.contains("kg")) {
+			System.out.print("How much weight will you carry?");
+			weight = input.next();
+			try {
+				this.setWeight(weight);
+			} catch (WeightFormatException e) {
+				System.out.println("Incorreect Weight Format, put the weight that you can carry (kg)");
+			}
+		}
 	}
 	
 	public void setBreaktime(Scanner input) {
@@ -122,22 +135,22 @@ public abstract class Health implements HealthInput{
 	}	
 
 	
-	public void getUserInput(Scanner input) {
-		System.out.print("Health Program name :");//운동 이름을 입력받기
-		String ProgramName = input.next();
-		this.setProgramName(ProgramName);
-		
-		System.out.print("What is your member ID? :");//회원 아이디를 입력받기
-		int id = input.nextInt();
-		this.setId(id);
-		
-		System.out.print("How much weight will you carry?(kg)");//들 수 있는 중량 입력받기
-		String weight = input.next();
-		this.setWeight(weight);
-		
-		System.out.print("How much break time do you need? :");//운동하는 동안의 쉬는시간 입력받기
-		String breaktime = input.next();
-		this.setBreaktime(breaktime);
-	}
+//	public void getUserInput(Scanner input) {
+//		System.out.print("Health Program name :");//운동 이름을 입력받기
+//		String ProgramName = input.next();
+//		this.setProgramName(ProgramName);
+//		
+//		System.out.print("What is your member ID? :");//회원 아이디를 입력받기
+//		int id = input.nextInt();
+//		this.setId(id);
+//		
+//		System.out.print("How much weight will you carry?(kg)");//들 수 있는 중량 입력받기
+//		String weight = input.next();	
+//		this.setWeight(weight);
+//		
+//		System.out.print("How much break time do you need? :");//운동하는 동안의 쉬는시간 입력받기
+//		String breaktime = input.next();
+//		this.setBreaktime(breaktime);
+//	}
 
 }

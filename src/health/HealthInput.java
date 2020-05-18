@@ -2,6 +2,8 @@ package health;
 
 import java.util.Scanner;
 
+import exceptions.WeightFormatException;
+
 public interface HealthInput {
 	
 	public void setProgramName(String programName);
@@ -10,7 +12,7 @@ public interface HealthInput {
 	
 	public void setId(int id);
 	
-	public void setWeight(String weight);
+	public void setWeight(String weight) throws WeightFormatException;
 	
 	public void setBreaktime(String breaktime);
 	

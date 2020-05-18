@@ -1,6 +1,7 @@
 package healthManagement;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import health.ARMexercise;
@@ -22,34 +23,43 @@ public class HealthManager {
 		int kind = 0;
 		HealthInput healthInput;
 		while (kind !=1 && kind !=2 && kind != 3) {//1, 2, 3을 선택하지 않으면 계속 반복
-			System.out.print("1 for LowerBody Health Program\n");//운동의 종류 선택하기
-			System.out.print("2 for Arm Health Program\n");
-			System.out.print("3 for Chest Health Program\n");
-			System.out.print("Select num 1, 2, or 3 for Health Program kind between 1 and 2 :");
-			kind = input.nextInt();
-			if (kind == 1) {
-				//하체운동 일때 입력파트
-				healthInput = new ROWERBODYexercise(Healthkind.lowerBodyExercise);
-				healthInput.getUserInput(input);
-				healths.add(healthInput);
-				break;
+			try {
+				System.out.print("1 for LowerBody Health Program\n");//운동의 종류 선택하기
+				System.out.print("2 for Arm Health Program\n");
+				System.out.print("3 for Chest Health Program\n");
+				System.out.print("Select num 1, 2, or 3 for Health Program kind:");
+				kind = input.nextInt();
+				if (kind == 1) {
+					//하체운동 일때 입력파트
+					healthInput = new ROWERBODYexercise(Healthkind.lowerBodyExercise);
+					healthInput.getUserInput(input);
+					healths.add(healthInput);
+					break;
+				}
+				else if (kind == 2) {
+					//팔운동 일때 입력파트
+					healthInput = new ARMexercise(Healthkind.ArmExercise);
+					healthInput.getUserInput(input);
+					healths.add(healthInput);
+					break;
+				}
+				else if (kind == 3) {
+					//가슴운동 일때 입력파트
+					healthInput = new CHESTexercise(Healthkind.ChestExercise);
+					healthInput.getUserInput(input);
+					healths.add(healthInput);
+					break;
+				}
+				else {
+					System.out.println("Select num for Health Program kind between 1 and 3 :");
+				}
 			}
-			else if (kind == 2) {
-				//팔운동 일때 입력파트
-				healthInput = new ARMexercise(Healthkind.ArmExercise);
-				healthInput.getUserInput(input);
-				healths.add(healthInput);
-				break;
-			}
-			else if (kind == 3) {
-				//가슴운동 일때 입력파트
-				healthInput = new CHESTexercise(Healthkind.ChestExercise);
-				healthInput.getUserInput(input);
-				healths.add(healthInput);
-				break;
-			}
-			else {
-				System.out.println("Select num for Health Program kind between 1 and 3 :");
+			catch(InputMismatchException e) {
+				System.out.println("Please put an integer between 1 and 3!");
+				if (input.hasNext()) {
+					input.next();
+				}
+				kind=-1;		
 			}
 		}
 	}
