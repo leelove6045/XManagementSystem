@@ -1,11 +1,17 @@
 package health;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import exceptions.WeightFormatException;
 
-public abstract class Health implements HealthInput{
+public abstract class Health implements HealthInput, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1385201333400046073L;
+	
 	protected Healthkind kind = Healthkind.ArmExercise;
 	protected String ProgramName;
 	protected int id;

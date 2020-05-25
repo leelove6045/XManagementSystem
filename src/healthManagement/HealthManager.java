@@ -1,23 +1,33 @@
 package healthManagement;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import health.ARMexercise;
 import health.CHESTexercise;
-import health.Health;
+import health.HealthInput;
 import health.Healthkind;
 import health.ROWERBODYexercise;
-import health.HealthInput;
 
-public class HealthManager {
+public class HealthManager implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7213391238241187200L;
+	
 	ArrayList<HealthInput> healths = new ArrayList<HealthInput>();
-	Scanner input;
+	transient Scanner input;
 	
 	HealthManager (Scanner input){
 		this.input = input;
 	}
+	
+	
+    public void setScanner(Scanner input) {
+        this.input = input;
+    }
 	
 	public void addHealth() {//헬스 추가하기
 		int kind = 0;
