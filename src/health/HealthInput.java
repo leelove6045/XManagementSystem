@@ -10,6 +10,14 @@ public interface HealthInput {
 	
 	public int getId();
 	
+	public String getProgramName();
+	
+	public String getWeight();
+	
+	public String getBreaktime();
+	
+	
+	
 	public void setId(int id);
 	
 	public void setWeight(String weight) throws WeightFormatException;
@@ -19,6 +27,7 @@ public interface HealthInput {
 	public abstract void getUserInput(Scanner input);
 	
 	public abstract void printInfo() ;
+	
 
 	public void setProgramName(Scanner input);
 	

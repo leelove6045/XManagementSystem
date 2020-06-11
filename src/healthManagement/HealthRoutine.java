@@ -8,6 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import gui.WindowFrame;
 import log.EventLogger;
 
 
@@ -26,6 +28,7 @@ public class HealthRoutine {
 			healthManager.setScanner(input);
 		}
 		
+		WindowFrame frame = new WindowFrame(healthManager);
 		selectHealth(input, healthManager);
 		putObject(healthManager, "healthmanager.ser");
 		

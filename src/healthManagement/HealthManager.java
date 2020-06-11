@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import health.ARMexercise;
 import health.CHESTexercise;
+import health.Health;
 import health.HealthInput;
 import health.Healthkind;
 import health.ROWERBODYexercise;
@@ -143,6 +144,14 @@ public class HealthManager implements Serializable {
 		for(int i=0; i<healths.size();i++) {
 			healths.get(i).printInfo();
 		}
+	}
+	
+	public int size() {
+		return healths.size();
+	}
+	
+	public HealthInput get(int index) {
+		return (Health) healths.get(index);
 	}
 	
 	
